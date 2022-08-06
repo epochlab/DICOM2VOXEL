@@ -1,23 +1,54 @@
 #!/usr/bin/env python3
 
 import os
-import pydicom as dicom
+import pydicom
 import numpy as np
 import matplotlib.pyplot as plt
 
-def load_dicom(x):
-    return dicom.dcmread(DATA + x)
+def load_dicom(path):
+    slices = [pydicom.dcmread(path + s) for s in sorted(os.listdir(path))]
+    slice_thickness = slices[0].ImagePositionPatient[2] - slices[1].ImagePositionPatient[2]
+    return slices, slice_thickness
 
-DATA = 'path_to_directory'
-dicom_files = [f for f in sorted(os.listdir(DATA)) if not f.startswith('.')]
+def pixel_hu(data):
+    image = np.stack([slice.pixel_array for slice in data])
+    image = image.astype(np.int16)
+
+    intercept = data[0].RescaleIntercept
+    slope = data[0].RescaleSlope
+
+    if slope != 1:
+        image = slope * image.astype(np.float64)
+        image = image.astype(np.int16)
+
+    image += np.int16(intercept)
+    return inp.array(image, dtype=np.int16)
+
+def largest_label_volume(im, bg=-1)
+    vals, counts = np.unique(im, return_counts=True)
+    
+    counts = counts[vals != bg]
+    vals = vals[vals != bg]
+
+    if len(counts) > 0:
+        return vals[np.argmax(counts)]
+    else:
+        return None
+
+DATA = '/Volumes/artemis/library/datasets/dicom/ANGIO_CT_9712/dicom/'
 
 index = 1
-DICOM = load_dicom(dicom_files[index])
+dicom, depth = load_dicom(DATA)
+pixels = pixel_hu(dicom)
 
-print('Min. density value:', np.amin(DICOM.pixel_array))
-print('Max. density value:', np.amax(DICOM.pixel_array))
-print(DICOM)
 
-plt.imshow(DICOM.pixel_array)
-plt.colorbar()
-plt.show()
+
+# density_min = np.amin(dicom[index].pixel_array)
+# densiry_max = np.amax(dicom[index].pixel_array)
+
+# print(dicom[index])
+# print(dicom[index].pixel_array)
+
+# plt.imshow(pixels[0], cmap=plt.cm.bone)
+# plt.colorbar()
+# plt.show()
