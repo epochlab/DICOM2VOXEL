@@ -2,7 +2,11 @@
 
 **Project ID:** yMg9E1QW
 
-![alt text](https://github.com/epochlab/dicom2voxel/blob/main/sample.png)
+<p align="center">
+  <img src="https://github.com/epochlab/dicom2voxel/blob/main/sample.png">
+</p>
+
+--------------------------------------------------------------------
 
 #### Visualizing DICOM datasets.
 Abstract: *Digital Imaging and Communications in Medicine (DICOM) is the standard for the communication and management of medical imaging information and related data. This repository allows a user to view DICOM data plus render the dataset as 3D voxel grid in SideFX Houdini.*
