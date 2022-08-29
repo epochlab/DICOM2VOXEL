@@ -1,4 +1,4 @@
-# dicom2voxel
+# DICOM2VOXEL
 
 **Project ID:** yMg9E1QW
 
