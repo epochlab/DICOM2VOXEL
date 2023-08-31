@@ -3,7 +3,7 @@
 **Project ID:** yMg9E1QW
 
 <p align="center">
-  <img src="https://github.com/epochlab/dicom2voxel/blob/main/sample.png">
+  <img src="https://github.com/epochlab/DICOM2VOXEL/blob/main/sample.png">
 </p>
 
 --------------------------------------------------------------------
